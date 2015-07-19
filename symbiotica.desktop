@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Symbiotica
+Type=Application
+Categories=Development;Java;
+Exec=/home/pixel/Desktop/symbiotica/symbiotica
+Icon=/home/pixel/code/Processing/p5logo.png
+Terminal=false
+StartupNotify=true

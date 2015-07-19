@@ -20,6 +20,7 @@ DeviceRegistry registry;
 PusherObserver pusherObserver;
 int numGroups = 0;
 boolean bDoLoad = false;
+boolean bShowDebugLine = false;
 
 float x1 = 0;
 float x2 = 0;
@@ -34,12 +35,11 @@ void setup() {
   segments = new ArrayList<Segment>();
 
   // Load a test movie
-  //movie = new Movie(this, "tetrahedron.mov");
-  //movie.loop();
+  movie = new Movie(this, "video1.mov");
+  movie.loop();
   
   // Load a test image
   image = loadImage("nest-network-thick.jpg");
-  //image = loadImage("checkerboard.png");
   
   ellipseMode(CENTER);
   
@@ -101,6 +101,9 @@ void keyPressed() {
     if((key == 'l') || (key == 'L')) {
       bDoLoad = true;
     }
+    if((key == 'd') || (key == 'D')) {
+     bShowDebugLine = !bShowDebugLine; 
+    }
 }
 
 void mousePressed() {
@@ -133,19 +136,18 @@ void draw() {
 
    background(0);
    
-   //image(movie, 0, 0, width, height);
-   //image(image, 0, 0, width, height);
-   
-   strokeWeight(10);
-   stroke(255);
-   x1 = x2 = mouseX;
-   line(x1,0,x2,height);   
-//   x1 += 0.5f;
-//   x2 = x1;
-//
-//   if(x1 > width) {
-//     x1 = x2 = 0;  
-//   }
+   if(!bShowDebugLine) {
+     image(movie, 0, 0, width, height);
+     //image(image, 0, 0, width, height);
+   }
+   else if
+   (bShowDebugLine) {
+     strokeWeight(10);
+     stroke(255);
+     x1 = x2 = mouseX;
+     line(x1,0,x2,height);
+   }   
+
    
    updatePixels();
    if (pusherObserver.hasStrips) {
