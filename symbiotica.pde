@@ -86,7 +86,7 @@ class PusherObserver implements Observer {
         
       }
 
-      if(numGroups > 1) {
+      if(numGroups >= 1) {
         this.hasStrips = true;
       }
     }
@@ -151,7 +151,6 @@ void draw() {
    
    updatePixels();
    if (pusherObserver.hasStrips) {
-      println("has strips");
       registry.setExtraDelay(0);
       registry.startPushing();
       
