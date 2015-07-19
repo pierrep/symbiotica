@@ -86,7 +86,7 @@ class PusherObserver implements Observer {
         
       }
 
-      if(numGroups == 3) {
+      if(numGroups > 1) {
         this.hasStrips = true;
       }
     }
@@ -151,7 +151,7 @@ void draw() {
    
    updatePixels();
    if (pusherObserver.hasStrips) {
-      
+      println("has strips");
       registry.setExtraDelay(0);
       registry.startPushing();
       
@@ -194,6 +194,7 @@ void saveData()
 
 void loadData() {
   List<Strip> strips;
+  println("load data");
   xml = loadXML("data/data.xml");
   segments.clear();
   
@@ -203,21 +204,23 @@ void loadData() {
   {
     int group = children[i].getInt("group");
     int id = children[i].getInt("id");
-    //println("id="+id+" group="+group);
+    println("id="+id+" group="+group);
     
     strips = registry.getStrips(group);
-    Strip s = strips.get(id);
-    
-    float x1 = children[i].getFloat("x1");
-    float y1 = children[i].getFloat("y1");
-    float x2 = children[i].getFloat("x2");
-    float y2 = children[i].getFloat("y2");
-    int pixoffset = children[i].getInt("offset");
-    int numpix = children[i].getInt("pixels");
-    String name = children[i].getString("name");
-    
-    segments.add( new Segment(x1, y1, x2, y2, s, numpix, pixoffset, group, id, name) );
-    //println("segment added = "+x1+" "+y1+" "+x2+" "+y2);
+    if(!strips.isEmpty()) {
+      Strip s = strips.get(id);
+      
+      float x1 = children[i].getFloat("x1");
+      float y1 = children[i].getFloat("y1");
+      float x2 = children[i].getFloat("x2");
+      float y2 = children[i].getFloat("y2");
+      int pixoffset = children[i].getInt("offset");
+      int numpix = children[i].getInt("pixels");
+      String name = children[i].getString("name");
+      
+      segments.add( new Segment(x1, y1, x2, y2, s, numpix, pixoffset, group, id, name) );
+      println("segment added = "+x1+" "+y1+" "+x2+" "+y2);
+    }
 
   } 
   println("Loaded XML");
