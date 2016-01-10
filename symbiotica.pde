@@ -35,7 +35,7 @@ void setup() {
   segments = new ArrayList<Segment>();
 
   // Load a test movie
-  movie = new Movie(this, "video1.mov");
+  movie = new Movie(this, "video1.mp4");
   movie.loop();
   
   // Load a test image
